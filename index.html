@@ -9,6 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
     <style>
         .header {
+            animation: 3s ease-out 0s 1 appear;
             position: absolute;
             top: 0;
             color: white;
@@ -37,40 +38,45 @@
             justify-content: center;
         }
 
-        #get-discount {
+        #call {
             display: block;
             width: 100%;
             max-width: 350px;
             height: 50px;
             background: transparent;
             color: white;
-            box-shadow: 2px 2px 0px 5px rgba(250, 247, 247, 0.1);
+            box-shadow: 2px 2px 0 5px rgba(250, 247, 247, 0.1);
             border: 0;
             cursor: pointer;
             text-transform: uppercase;
             position: relative;
             overflow-x: hidden;
-            animation: 2s ease-out 0s 1 appear;
+            animation: 3s ease-out 0s 1 appear;
         }
 
         @keyframes appear {
             0% {
                 opacity: 0;
             }
+
+            90% {
+                opacity: 0;
+            }
+
             100% {
                 opacity: 1;
             }
         }
 
         .content {
-            animation: 2s ease-out 0s 1 appear;
+            animation: 3s ease-out 0s 1 appear;
             display: block;
             text-align: center;
             max-width: 400px;
             margin: auto;
             color: white;
             text-transform: uppercase;
-            box-shadow: 2px 2px 0px 5px rgba(250, 247, 247, 0.1);
+            box-shadow: 2px 2px 0 5px rgba(250, 247, 247, 0.1);
             padding: 15px;
         }
 
@@ -78,10 +84,22 @@
             color: red;
             font-weight: 900;
         }
+
+        canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            display: block;
+            background: #000;
+            width: 100vw;
+            height: 100vh;
+            z-index: -100;
+        }
     </style>
 </head>
 <body>
 <h1 class="header">GRP.<b class="red">7</b></h1>
+<canvas id="canvas"></canvas>
 <main class="content">
     <h3>We are GRP.<b class="red">7</b></h3>
     The only <b class="red">digital</b> agency you ever need!
@@ -96,7 +114,69 @@
     Just...
 </main>
 <footer>
-    <button id="get-discount" onclick="window.open('tel:+358405581267')">Call us, <b class='red'>now!</b></button>
+    <button id="call" onclick="window.open('tel:+358405581267')">Call us, <b class='red'>now!</b></button>
 </footer>
 </body>
+<script>
+    window.onload = () => {
+        const canvas = document.getElementById("canvas");
+        console.log(canvas)
+        const context = canvas.getContext("2d");
+        const particles = []; // an array to keep track of each particle
+        const colors = ["blue", "green",  "orange", "red", "white", "#4488FF", "yellow"];
+        const timeToStart = (30 * 2); // almost 3 seconds till the simulation will start
+        let countToStart = 0;
+        canvas.width = window.innerWidth; // full width Canvas
+        canvas.height = window.innerHeight; // full height Canvas
+        const random = (min, max) => Math.random() * (max - min) + min;
+
+        const createParticles = function(n) {
+            for (let i = 0; i < n; i ++) {
+                particles.push({
+                    x: canvas.width / 2, // center the particle on the x axis
+                    y: canvas.height / 2, // center the particle on the y axis
+                    color: colors[parseInt(random(0, colors.length))],
+                    size: random(2, 7),
+                    alpha: random(0.5, 1),
+                    speed: random(10, 100), // speed to scale up the vector
+                    vel: { // velocity unit vector
+                        x: random(-.1, .1),
+                        y: random(-.1, .1),
+                    }
+                });
+            }
+        };
+
+        const update = function() {
+            countToStart ++;
+            if (countToStart > timeToStart) {
+                particles.forEach(p => {
+                    p.x += p.vel.x * p.speed;
+                    p.y += p.vel.y * p.speed;
+                });
+            }
+        };
+
+        const draw = function() {
+            context.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach(p => {
+                context.fillStyle = p.color;
+                context.globalAlpha = p.alpha;
+                context.fillRect(p.x, p.y, p.size, p.size);
+                context.globalAlpha = 1;
+            });
+        };
+
+        const tick = function() {
+            update();
+            draw();
+            requestAnimationFrame(tick);
+        };
+
+        createParticles(1000); // pass the number of particles
+        tick();
+
+    }
+
+</script>
 </html>
