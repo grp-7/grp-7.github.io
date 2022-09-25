@@ -44,7 +44,8 @@
             height: 50px;
             background: transparent;
             color: white;
-            border: white solid 1px;
+            box-shadow: 2px 2px 0px 5px rgba(250, 247, 247, 0.1);
+            border: 0;
             cursor: pointer;
             text-transform: uppercase;
             position: relative;
@@ -68,54 +69,13 @@
             margin: auto;
             color: white;
             text-transform: uppercase;
-            box-shadow: 2px 2px 0px 5px rgba(250,247,247,0.1);
+            box-shadow: 2px 2px 0px 5px rgba(250, 247, 247, 0.1);
             padding: 15px;
         }
-
 
         .red {
             color: red;
             font-weight: 900;
-        }
-
-        .flare {
-            position: absolute;
-            top: 0;
-            transform: skewX(-45deg); // Наклон
-        animation: flareAnimation;
-            left: -150%;
-            background: linear-gradient(90deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.4));
-            animation: flareAnimation 3s infinite linear; // Время и тип анимации можно менять
-        }
-
-        @keyframes flareAnimation {
-            0% {
-                left: -150%;
-            }
-            100% {
-                left: 150%;
-            }
-        }
-
-        .flare {
-            position: absolute;
-            top: 0;
-            height: 100%;
-            width: 45px;
-            transform: skewX(-45deg); // Наклон
-        animation: flareAnimation;
-            left: -150%;
-            background: linear-gradient(90deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.4));
-            animation: flareAnimation 3s infinite linear; // Время и тип анимации можно менять
-        }
-
-        @keyframes flareAnimation {
-            0% {
-                left: -150%;
-            }
-            100% {
-                left: 150%;
-            }
         }
     </style>
 </head>
@@ -132,17 +92,7 @@
     Your promo code: 4235
 </main>
 <footer>
-    <button id="get-discount"><span class='flare'></span>Call us, <b class='red'>now!</b></button>
+    <button id="get-discount" onclick="window.open('tel:+358405581267')">Call us, <b class='red'>now!</b></button>
 </footer>
 </body>
-<script>
-    window.onload = () => {
-        btn = document.getElementById("get-discount");
-        btn.addEventListener("click", () => {
-            window.open("tel:+358405581267");
-        })
-
-    }
-
-</script>
 </html>
