@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>valkeakosk.io</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <style>
+        .header {
+            position: absolute;
+            top: 0;
+            color: white;
+            text-transform: uppercase;
+            display: block;
+            text-align: center;
+            width: 100%;
+            font-size: 24px;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            width: 100vw;
+            min-height: 100vh;
+            background: black;
+            display: flex;
+        }
+
+
+        footer {
+            position: absolute;
+            width: 100%;
+            bottom: 25px;
+            display: flex;
+            justify-content: center;
+        }
+
+        #get-discount {
+            display: block;
+            width: 100%;
+            max-width: 350px;
+            height: 50px;
+            background: transparent;
+            color: white;
+            border: white solid 1px;
+            cursor: pointer;
+            text-transform: uppercase;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        @keyframes slideInFromLeft {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
+        .content {
+            animation: 2s ease-out 0s 1 slideInFromLeft;
+            display: block;
+            text-align: center;
+            max-width: 400px;
+            margin: auto;
+            color: white;
+            text-transform: uppercase;
+            box-shadow: 2px 2px 0px 5px rgba(250,247,247,0.1);
+            padding: 15px;
+        }
+
+
+        .red {
+            color: red;
+            font-weight: 900;
+        }
+
+        .flare {
+            position: absolute;
+            top: 0;
+            transform: skewX(-45deg); // Наклон
+        animation: flareAnimation;
+            left: -150%;
+            background: linear-gradient(90deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.4));
+            animation: flareAnimation 3s infinite linear; // Время и тип анимации можно менять
+        }
+
+        @keyframes flareAnimation {
+            0% {
+                left: -150%;
+            }
+            100% {
+                left: 150%;
+            }
+        }
+
+        .flare {
+            position: absolute;
+            top: 0;
+            height: 100%;
+            width: 45px;
+            transform: skewX(-45deg); // Наклон
+        animation: flareAnimation;
+            left: -150%;
+            background: linear-gradient(90deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.4));
+            animation: flareAnimation 3s infinite linear; // Время и тип анимации можно менять
+        }
+
+        @keyframes flareAnimation {
+            0% {
+                left: -150%;
+            }
+            100% {
+                left: 150%;
+            }
+        }
+    </style>
+</head>
+<body>
+<h1 class="header">GRP.<b class="red">7</b></h1>
+<main class="content">
+    <h3>We are GRP.<b class="red">7</b></h3>
+    The only <b class="red">digital</b> agency you ever need!
+    <br>
+    <br>
+    Get <b class="red">-10%</b> discount.
+    <br>
+    <br>
+    Your promo code: 4235
+</main>
+<footer>
+    <button id="get-discount"><span class='flare'></span>Call us, <b class='red'>now!</b></button>
+</footer>
+</body>
+<script>
+    window.onload = () => {
+        btn = document.getElementById("get-discount");
+        btn.addEventListener("click", () => {
+            window.open("tel:+358405581267");
+        })
+
+    }
+
+</script>
+</html>
